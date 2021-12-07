@@ -1,47 +1,34 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="d-flex">
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Kurslar</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Kitaplar</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#"
-              >Çalışma Takvimi</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Destek</a>
-          </li>
-        </ul>
+  <header>
+    <nav>
+      <div class="branding">
+        <img src="@/assets/logo.png" alt="" />
       </div>
-    </div>
-  </nav>
+      <ul v-show="!mobile" class="navigation">
+        <li><router-link class="link">Home</router-link></li>
+        <li><router-link class="link">About</router-link></li>
+        <li><router-link class="link">Portfolio</router-link></li>
+        <li><router-link class="link">Contact</router-link></li>
+      </ul>
+      <div class="icon">
+        <button
+          @click="toggleMobileNav"
+          v-show="mobile"
+          :class="{ 'icon-active': mobileNav }"
+        >
+          BAS
+        </button>
+      </div>
+      <transition name="mobile-nav">
+        <ul v-show="mobile" class="dropdown-nav">
+          <li><router-link class="link">Home</router-link></li>
+          <li><router-link class="link">About</router-link></li>
+          <li><router-link class="link">Portfolio</router-link></li>
+          <li><router-link class="link">Contact</router-link></li>
+        </ul>
+      </transition>
+    </nav>
+  </header>
 </template>
 <script>
 export default {
@@ -51,5 +38,24 @@ export default {
 </script>
 
 <style scoped>
+header {
+  background-color: red;
+  z-index: 99;
+  width: 100%;
+  position: fixed;
+  transition: 0.5s ease all;
+  color: white;
+}
 
+nav {
+  display: flex;
+  flex-direction: row;
+  padding: 12px 0;
+  transition: 0.5s ease all;
+  margin: 0 auto;
+  width: 90%;
+  @media (min-width: 1140px) {
+    max-width: 1140px;
+  }
+}
 </style>
